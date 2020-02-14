@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YiC-ln-RYe">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--India News View Controller-->
+        <scene sceneID="cri-6K-t2c">
+            <objects>
+                <viewController id="Ohd-Lv-t8k" customClass="IndiaNewsViewController" customModule="NewsFeed" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5Zl-do-KCG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="900"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IdZ-kG-LBB">
+                                <rect key="frame" x="0.0" y="88" width="414" height="729"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="indiaNewsCell" id="FFL-Uf-7SH">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FFL-Uf-7SH" id="Af1-5G-uVa">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Ohd-Lv-t8k" id="LcR-tx-rH0"/>
+                                    <outlet property="delegate" destination="Ohd-Lv-t8k" id="kPh-xM-dI3"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="IdZ-kG-LBB" firstAttribute="leading" secondItem="Y9t-s9-M9n" secondAttribute="leading" id="Cff-q8-pvx"/>
+                            <constraint firstItem="Y9t-s9-M9n" firstAttribute="bottom" secondItem="IdZ-kG-LBB" secondAttribute="bottom" id="JYI-L4-foM"/>
+                            <constraint firstItem="Y9t-s9-M9n" firstAttribute="trailing" secondItem="IdZ-kG-LBB" secondAttribute="trailing" id="pYY-sv-2dj"/>
+                            <constraint firstItem="IdZ-kG-LBB" firstAttribute="top" secondItem="Y9t-s9-M9n" secondAttribute="top" id="pds-3T-VLQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Y9t-s9-M9n"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="66U-yJ-Gw7"/>
+                    <connections>
+                        <segue destination="eNz-lq-Pvp" kind="show" id="IJp-pG-MTF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rzR-UT-sEo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1949.2753623188407" y="-558.48214285714278"/>
+        </scene>
+        <!--About India News View Controller-->
+        <scene sceneID="h2g-w3-fox">
+            <objects>
+                <viewController id="eNz-lq-Pvp" customClass="AboutIndiaNewsViewController" customModule="NewsFeed" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dye-Ed-wXY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="900"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="9Et-wc-fym"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="G5o-5d-gK5"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1ej-ZX-Ui8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2885" y="-561"/>
+        </scene>
+        <!--Head Lines View Controller-->
+        <scene sceneID="kgX-FS-WVR">
+            <objects>
+                <viewController id="ims-GP-bo5" customClass="HeadLinesViewController" customModule="NewsFeed" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PBG-ZO-OkR">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="900"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HlH-y0-tWG">
+                                <rect key="frame" x="0.0" y="88" width="414" height="729"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="headlinesCell" id="7V4-yn-8nf">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7V4-yn-8nf" id="h1t-Tl-u8J">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="ims-GP-bo5" id="NMI-1t-MwP"/>
+                                    <outlet property="delegate" destination="ims-GP-bo5" id="H1z-c5-GhD"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="HlH-y0-tWG" firstAttribute="leading" secondItem="mgP-rm-vi7" secondAttribute="leading" id="KmX-Ad-TJc"/>
+                            <constraint firstItem="mgP-rm-vi7" firstAttribute="bottom" secondItem="HlH-y0-tWG" secondAttribute="bottom" id="UU2-gG-iTk"/>
+                            <constraint firstItem="HlH-y0-tWG" firstAttribute="top" secondItem="mgP-rm-vi7" secondAttribute="top" id="X8Z-AN-Lhi"/>
+                            <constraint firstItem="mgP-rm-vi7" firstAttribute="trailing" secondItem="HlH-y0-tWG" secondAttribute="trailing" id="ptT-Ey-lrE"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="mgP-rm-vi7"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="S88-FK-qJI"/>
+                    <connections>
+                        <segue destination="TIl-J6-6Bb" kind="show" id="mpc-MU-vdN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PLg-GF-cjm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1286.9565217391305" y="-558.48214285714278"/>
+        </scene>
+        <!--About Headlines View Controller-->
+        <scene sceneID="IRy-C8-pi5">
+            <objects>
+                <viewController id="TIl-J6-6Bb" customClass="AboutHeadlinesViewController" customModule="NewsFeed" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sOm-ND-ywz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="900"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="JCp-6J-x5g"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="SzO-rV-SKE"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Je0-gA-wpd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-443" y="-559"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="gPn-bR-uQa">
+            <objects>
+                <tabBarController id="YiC-ln-RYe" sceneMemberID="viewController">
+                    <size key="freeformSize" width="414" height="900"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ZIx-rG-pxq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="s31-9t-6QE" kind="relationship" relationship="viewControllers" id="8bQ-bB-cVI"/>
+                        <segue destination="vpt-c3-azj" kind="relationship" relationship="viewControllers" id="eSF-hv-OXp"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hdJ-Vw-IE9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-552" y="-1336"/>
+        </scene>
+        <!--HeadLines-->
+        <scene sceneID="Tq9-hw-lvW">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="s31-9t-6QE" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="HeadLines" image="house.fill" catalog="system" selectedImage="house.fill" id="hef-0k-XDM"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="MRd-Yv-p7k">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ims-GP-bo5" kind="relationship" relationship="rootViewController" id="Ves-2N-20i"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y0C-7d-WNH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2343" y="-558"/>
+        </scene>
+        <!--India-->
+        <scene sceneID="Qfk-1E-rA5">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vpt-c3-azj" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="India" image="flag.fill" catalog="system" selectedImage="flag.fill" id="rbc-wt-flb"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2Ln-y4-xSP">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Ohd-Lv-t8k" kind="relationship" relationship="rootViewController" id="CHZ-j2-pzN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YLj-g2-ZQX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1017" y="-558"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="flag.fill" catalog="system" width="64" height="60"/>
+        <image name="house.fill" catalog="system" width="64" height="52"/>
+    </resources>
+</document>

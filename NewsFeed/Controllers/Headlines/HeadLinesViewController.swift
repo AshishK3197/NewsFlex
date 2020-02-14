@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HeadLinesViewController.swift
 //  NewsFeed
 //
 //  Created by Ashish Kumar on 14/02/20.
@@ -8,12 +8,14 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class HeadLinesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // Do any additional setup after loading the view.
     }
+    
 
 
 }
