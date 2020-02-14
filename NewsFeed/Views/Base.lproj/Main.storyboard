@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--India News View Controller-->
+        <!--India-->
         <scene sceneID="cri-6K-t2c">
             <objects>
                 <viewController id="Ohd-Lv-t8k" customClass="IndiaNewsViewController" customModule="NewsFeed" customModuleProvider="target" sceneMemberID="viewController">
@@ -43,8 +43,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Y9t-s9-M9n"/>
                     </view>
-                    <navigationItem key="navigationItem" id="66U-yJ-Gw7"/>
+                    <navigationItem key="navigationItem" title="India" id="66U-yJ-Gw7"/>
                     <connections>
+                        <outlet property="indiaNewsTableView" destination="IdZ-kG-LBB" id="Z5I-Zf-8ou"/>
                         <segue destination="eNz-lq-Pvp" kind="show" id="IJp-pG-MTF"/>
                     </connections>
                 </viewController>
@@ -68,7 +69,7 @@
             </objects>
             <point key="canvasLocation" x="2885" y="-561"/>
         </scene>
-        <!--Head Lines View Controller-->
+        <!--HeadLines-->
         <scene sceneID="kgX-FS-WVR">
             <objects>
                 <viewController id="ims-GP-bo5" customClass="HeadLinesViewController" customModule="NewsFeed" customModuleProvider="target" sceneMemberID="viewController">
@@ -104,8 +105,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mgP-rm-vi7"/>
                     </view>
-                    <navigationItem key="navigationItem" id="S88-FK-qJI"/>
+                    <navigationItem key="navigationItem" title="HeadLines" id="S88-FK-qJI"/>
                     <connections>
+                        <outlet property="headLinesTableView" destination="HlH-y0-tWG" id="mTF-bV-ZC5"/>
                         <segue destination="TIl-J6-6Bb" kind="show" id="mpc-MU-vdN"/>
                     </connections>
                 </viewController>
@@ -154,8 +156,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="s31-9t-6QE" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="HeadLines" image="house.fill" catalog="system" selectedImage="house.fill" id="hef-0k-XDM"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="MRd-Yv-p7k">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="MRd-Yv-p7k">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -173,8 +175,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vpt-c3-azj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="India" image="flag.fill" catalog="system" selectedImage="flag.fill" id="rbc-wt-flb"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2Ln-y4-xSP">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="2Ln-y4-xSP">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
