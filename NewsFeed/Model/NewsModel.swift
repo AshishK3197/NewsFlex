@@ -9,13 +9,13 @@
 import Foundation
 
 struct NewsModel:Codable {
-    let newsArticles : [Article]
+    let articles : [Article]
 }
 
 struct Article:Codable {
-    let author: String
+//    let author: String
     let title: String
-    let urlToImage: String
-    let publishedAt: Date
+//    let urlToImage: String
+    let publishedAt: String
     let content: String
 }
