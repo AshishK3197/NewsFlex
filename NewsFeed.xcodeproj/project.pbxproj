@@ -16,6 +16,8 @@
 		1F8780FA23F676C800567947 /* IndiaNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8780F923F676C800567947 /* IndiaNewsViewController.swift */; };
 		1F8780FD23F67B5200567947 /* AboutHeadlinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8780FC23F67B5200567947 /* AboutHeadlinesViewController.swift */; };
 		1F87810023F67B7500567947 /* AboutIndiaNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8780FF23F67B7500567947 /* AboutIndiaNewsViewController.swift */; };
+		1F87810223F685D800567947 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F87810123F685D800567947 /* ApiManager.swift */; };
+		1F87810523F689E500567947 /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F87810423F689E500567947 /* NewsModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		1F8780F923F676C800567947 /* IndiaNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndiaNewsViewController.swift; sourceTree = "<group>"; };
 		1F8780FC23F67B5200567947 /* AboutHeadlinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutHeadlinesViewController.swift; sourceTree = "<group>"; };
 		1F8780FF23F67B7500567947 /* AboutIndiaNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutIndiaNewsViewController.swift; sourceTree = "<group>"; };
+		1F87810123F685D800567947 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
+		1F87810423F689E500567947 /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,8 @@
 			children = (
 				1F8780DF23F6739000567947 /* AppDelegate.swift */,
 				1F8780E123F6739000567947 /* SceneDelegate.swift */,
+				1F87810623F689EC00567947 /* Model */,
+				1F87810323F685E000567947 /* API */,
 				1F8780F623F6765900567947 /* Controllers */,
 				1F8780F323F675F000567947 /* Views */,
 				1F8780E823F6739700567947 /* Assets.xcassets */,
@@ -106,6 +112,22 @@
 				1F8780FF23F67B7500567947 /* AboutIndiaNewsViewController.swift */,
 			);
 			path = IndiaNews;
+			sourceTree = "<group>";
+		};
+		1F87810323F685E000567947 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				1F87810123F685D800567947 /* ApiManager.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		1F87810623F689EC00567947 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1F87810423F689E500567947 /* NewsModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,9 +201,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F87810523F689E500567947 /* NewsModel.swift in Sources */,
 				1F8780F823F676AD00567947 /* HeadLinesViewController.swift in Sources */,
 				1F8780E023F6739000567947 /* AppDelegate.swift in Sources */,
 				1F8780FD23F67B5200567947 /* AboutHeadlinesViewController.swift in Sources */,
+				1F87810223F685D800567947 /* ApiManager.swift in Sources */,
 				1F87810023F67B7500567947 /* AboutIndiaNewsViewController.swift in Sources */,
 				1F8780E223F6739000567947 /* SceneDelegate.swift in Sources */,
 				1F8780FA23F676C800567947 /* IndiaNewsViewController.swift in Sources */,

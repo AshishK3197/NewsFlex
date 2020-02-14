@@ -10,6 +10,9 @@ import UIKit
 
 class IndiaNewsViewController: UIViewController {
 
+    @IBOutlet weak var indiaNewsTableView: UITableView!
+    
+    let itemArray = ["Rahul", "Sahil" , "Sagar"]
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -17,14 +20,20 @@ class IndiaNewsViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+}
+extension IndiaNewsViewController: UITableViewDelegate,UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return itemArray.count
     }
-    */
-
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = indiaNewsTableView.dequeueReusableCell(withIdentifier: "indiaNewsCell", for: indexPath)
+        cell.textLabel?.text = itemArray[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("The item selcted was \(itemArray[indexPath.row]) at row \(indexPath.row))")
+    }
+    
 }
