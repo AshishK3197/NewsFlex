@@ -13,9 +13,9 @@ struct NewsModel:Codable {
 }
 
 struct Article:Codable {
-//    let author: String
+    let author: String?
     let title: String
-//    let urlToImage: String
+    let urlToImage: String
     let publishedAt: String
     let content: String
 }

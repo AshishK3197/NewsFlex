@@ -9,22 +9,28 @@
 import UIKit
 
 class AboutHeadlinesViewController: UIViewController {
-
+    @IBOutlet weak var passedImage: UIImageView!
+    @IBOutlet weak var passedTitle: UILabel!
+    @IBOutlet weak var passedAuthor: UILabel!
+    @IBOutlet weak var passedPublishedAt: UILabel!
+    @IBOutlet weak var passedContent: UILabel!
+    
+    
+    var passedTitleText = String()
+    var passedAuthorText = String()
+    var passedContentText = String()
+    var passedPublishedAtText = String()
+    var passedImageView = UIImage()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        passedTitle.text = passedTitleText
+//        passedImage.image = passedImageView
+        passedAuthor.text = passedAuthorText
+        passedPublishedAt.text = passedPublishedAtText
+        passedContent.text = passedContentText
     }
+
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

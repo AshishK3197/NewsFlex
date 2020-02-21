@@ -10,7 +10,8 @@ import Foundation
 
 class ApiManager{
     
-    let newsUrl = "https://newsapi.org/v2/top-headlines?sources=google-news&apiKey=6a82e1fdb4014b6f8ae30519be253030"
+    let headlinesNewsUrl = "https://newsapi.org/v2/top-headlines?sources=google-news&apiKey=6a82e1fdb4014b6f8ae30519be253030"
+    let indiaNewsUrl = ""
     
     func getJSONFromUrl(urlString: String , completion: @escaping (Data? , Error?)-> Void){
         if let url = URL(string: urlString){
@@ -18,11 +19,11 @@ class ApiManager{
             let task = URLSession.shared.dataTask(with: urlRequest) {(data ,response, error)  in
                 if let err = error{
                     print(err.localizedDescription)
-                    return completion(nil,err)
+                    completion(nil,err)
                 }
                 if let responseData = data{
                     print("Data recieved : \(responseData)")
-                    return completion(responseData, nil)
+                    completion(responseData, nil)
                 }
                 
             }
@@ -34,28 +35,28 @@ class ApiManager{
         let decoder = JSONDecoder()
         do {
             let decodedData = try decoder.decode(NewsModel.self, from: json)
-            print(decodedData.articles[0].title)
-            return completion(decodedData, nil)
+//            print(decodedData.articles[0].title)
+            completion(decodedData, nil)
         } catch let err{
             print("Error creating NewsModel object from json responseData \(err)")
-            return completion(nil,err)
+            completion(nil,err)
         }
     }
     
 
     func fetchNews(completion: @escaping (NewsModel? , Error?)->Void){
-        getJSONFromUrl(urlString: newsUrl) { (data, error) in
+        getJSONFromUrl(urlString: headlinesNewsUrl) { (data, error) in
             if let err = error{
                 print(err.localizedDescription)
-                return completion(nil, err)
+                completion(nil, err)
             }
             if let data = data{
                 self.parseJSON(json: data) { (newsData, error) in
                     if let err = error{
                         print("Failed to get Data")
-                        return completion(nil , err)
+                        completion(nil , err)
                     }else{
-                        return completion(newsData,nil)
+                        completion(newsData,nil)
                     }
                 }
             }

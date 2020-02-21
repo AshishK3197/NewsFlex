@@ -18,6 +18,8 @@
 		1F87810023F67B7500567947 /* AboutIndiaNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8780FF23F67B7500567947 /* AboutIndiaNewsViewController.swift */; };
 		1F87810223F685D800567947 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F87810123F685D800567947 /* ApiManager.swift */; };
 		1F87810523F689E500567947 /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F87810423F689E500567947 /* NewsModel.swift */; };
+		75C604E024000E6900626AA2 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C604DE24000E6900626AA2 /* NewsTableViewCell.swift */; };
+		75C604E124000E6900626AA2 /* NewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75C604DF24000E6900626AA2 /* NewsTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		1F8780FF23F67B7500567947 /* AboutIndiaNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutIndiaNewsViewController.swift; sourceTree = "<group>"; };
 		1F87810123F685D800567947 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		1F87810423F689E500567947 /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
+		75C604DE24000E6900626AA2 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewsTableViewCell.swift; path = NewsFeed/Controllers/Headlines/NewsTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		75C604DF24000E6900626AA2 /* NewsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = NewsTableViewCell.xib; path = NewsFeed/Controllers/Headlines/NewsTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,8 @@
 		1F8780F323F675F000567947 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				75C604DE24000E6900626AA2 /* NewsTableViewCell.swift */,
+				75C604DF24000E6900626AA2 /* NewsTableViewCell.xib */,
 				1F8780E523F6739000567947 /* Main.storyboard */,
 			);
 			path = Views;
@@ -190,6 +196,7 @@
 			files = (
 				1F8780EC23F6739700567947 /* LaunchScreen.storyboard in Resources */,
 				1F8780E923F6739700567947 /* Assets.xcassets in Resources */,
+				75C604E124000E6900626AA2 /* NewsTableViewCell.xib in Resources */,
 				1F8780E723F6739000567947 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -209,6 +216,7 @@
 				1F87810023F67B7500567947 /* AboutIndiaNewsViewController.swift in Sources */,
 				1F8780E223F6739000567947 /* SceneDelegate.swift in Sources */,
 				1F8780FA23F676C800567947 /* IndiaNewsViewController.swift in Sources */,
+				75C604E024000E6900626AA2 /* NewsTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
