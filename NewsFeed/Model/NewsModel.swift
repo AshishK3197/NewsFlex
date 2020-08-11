@@ -8,14 +8,17 @@
 
 import Foundation
 
-struct NewsModel:Codable {
+
+//This is similar to NewsResponse what we get back from the server.
+struct NewsModel:Decodable {
     let articles : [Article]
 }
 
-struct Article:Codable {
+struct Article:Decodable {
     let author: String?
-    let title: String
-    let urlToImage: String
-    let publishedAt: String
-    let content: String
+    let title: String?
+    let url: String?
+    let urlToImage: String?
+    let publishedAt: String?
+    let content: String?
 }
