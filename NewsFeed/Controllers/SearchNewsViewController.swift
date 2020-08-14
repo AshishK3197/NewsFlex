@@ -108,9 +108,9 @@ extension SearchNewsViewController: UITableViewDataSource , UITableViewDelegate{
                 searchNewsTableView.deselectRow(at: indexPath, animated: true)
                 let vc = self.storyboard?.instantiateViewController(identifier: "AboutHeadlinesViewController") as? AboutHeadlinesViewController
                 vc?.recievedNewsItem = filteredNewsData[indexPath.row]
-                vc?.modalPresentationStyle = UIDevice.current.userInterfaceIdiom == .phone ? .fullScreen : .formSheet
                 let navVC = UINavigationController(rootViewController: vc!)
                 navVC.isNavigationBarHidden = true
+                navVC.modalPresentationStyle = UIDevice.current.userInterfaceIdiom == .phone ? .fullScreen : .formSheet
                 self.navigationController?.present(navVC, animated: true, completion: nil)
             }
     

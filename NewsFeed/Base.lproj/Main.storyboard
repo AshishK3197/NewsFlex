@@ -153,6 +153,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="F3t-Gm-ILs" secondAttribute="trailing" id="pP5-YR-pII"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="80" id="sAo-Uc-KL3">
                                         <rect key="frame" x="0.0" y="98" width="414" height="80"/>
@@ -193,6 +194,7 @@
                                                 <constraint firstItem="LK9-em-aws" firstAttribute="leading" secondItem="dSo-n6-Oc3" secondAttribute="leadingMargin" constant="16" id="nOY-Yl-xhN"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="80" id="hYS-hD-sKj">
                                         <rect key="frame" x="0.0" y="178" width="414" height="80"/>
@@ -233,6 +235,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="Fym-Y9-rND" secondAttribute="trailing" id="joz-t9-RO5"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -242,7 +245,9 @@
                             <outlet property="delegate" destination="MSZ-GT-M0q" id="099-Q4-yNl"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="IWV-dt-O28"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sgz-aK-AmN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

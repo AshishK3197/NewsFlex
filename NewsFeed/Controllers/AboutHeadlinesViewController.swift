@@ -81,9 +81,9 @@ class AboutHeadlinesViewController: UIViewController{
     @IBAction func readMoreLinkButton(_ sender: UIButton) {
         
         let webVC = self.storyboard?.instantiateViewController(withIdentifier: "webview") as? WebViewViewController
-        webVC?.modalPresentationStyle = UIDevice.current.userInterfaceIdiom == .phone ? .fullScreen : .formSheet
+        webVC?.modalPresentationStyle = .formSheet
         webVC?.recievedUrl = recievedNewsItem?.url
-        self.navigationController?.pushViewController(webVC! , animated: true)
+        self.navigationController?.pushViewController(webVC!, animated: true)
     }
     
     @IBAction func shareButton(_ sender: UIButton) {
@@ -145,6 +145,7 @@ class AboutHeadlinesViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil;
         navigationController?.setNavigationBarHidden(true, animated: true)
         newsImageView.addGradient([UIColor(white: 0, alpha: 0.6).cgColor, UIColor.clear.cgColor,
          UIColor(white: 0, alpha: 0.6).cgColor],

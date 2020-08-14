@@ -26,6 +26,7 @@ class HeadLinesViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil;
         getNewsData()
         registerNib()
         
@@ -109,6 +110,23 @@ extension HeadLinesViewController : MFMailComposeViewControllerDelegate{
     }
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        if let err = error{
+            print(err.localizedDescription)
+            controller.dismiss(animated: true, completion: nil)
+        }
+        
+        switch result {
+        case .saved:
+            print("Saved")
+        case .cancelled:
+            print("Cancelled")
+        case .failed:
+            print("Failed")
+        case .sent:
+            print("Sent")
+         default:
+            print("Not a matching case")
+        }
         controller.dismiss(animated: true, completion: nil)
     }
 }
