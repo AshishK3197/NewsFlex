@@ -17,7 +17,13 @@ class NewsTableViewCell: UITableViewCell {
     
     var newsData : Article? {
         didSet{
-            cellConfiguration()
+            cellConfigurationForDefaultNews()
+        }
+    }
+    
+    var filteredNewsData: Article? {
+        didSet{
+            cellConfigurationForFilteredNews()
         }
     }
     
@@ -57,7 +63,8 @@ class NewsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func cellConfiguration(){
+    /// Function responsible for configuring the cell on App Launch
+    func cellConfigurationForDefaultNews(){
         if let title = newsData?.title,let authorName = newsData?.author,let publishedAt = newsData?.publishedAt{
             NewsTitleLabel.text = title
             NewsPublishedAtLabel.text = publishedAt
@@ -80,4 +87,27 @@ class NewsTableViewCell: UITableViewCell {
         }
     }
     
+    /// Function responsible for configuration of cell on Searching News through filtering in Search Controller.
+   func cellConfigurationForFilteredNews(){
+    if let title = filteredNewsData?.title, let authorName = filteredNewsData?.author, let publishedAt = filteredNewsData?.publishedAt{
+        NewsTitleLabel.text = title
+        NewsPublishedAtLabel.text = publishedAt
+        NewsAuthorLabel.text = authorName
+        
+        
+        if let imageUrl = URL(string: "\(filteredNewsData?.urlToImage ?? "No image URL found")"){
+                       URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                           if let imageData = data{
+                               DispatchQueue.main.async {
+                                   self.NewsImageView.image = UIImage(data: imageData)
+                               }
+                           }
+                       }.resume()
+                   }
+               }else{
+                   NewsTitleLabel.text = "no title found"
+                   NewsPublishedAtLabel.text = " no publishedAt found"
+                   NewsAuthorLabel.text = "no authorName found"
+               }
+    }
 }

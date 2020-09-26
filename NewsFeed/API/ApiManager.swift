@@ -12,6 +12,10 @@ struct ApiManager {
     
     private let httpUtility = HttpUtility()
     
+    /// Function responsible for getting JSON Data.
+    /// - Parameters:
+    ///   - request: Input Parameter for Request Type.
+    ///   - completionHandler: Completion Handler of escaping type with specific result of NewsModel and Error type.
     func getJSONDataFromUrl(request: NewsRequest , completionHandler: @escaping (_ result: NewsModel?, _ Error: Error?)-> Void){
         
         let url : URL = request.finalUrl!
@@ -22,6 +26,10 @@ struct ApiManager {
    
     }
     
+    /// Function responsible for getting JSON Data for categorising News Articles.
+    /// - Parameters:
+    ///   - request: Input Parameter for Request Type.
+    ///   - completionHandler: Completion Handler of escaping type with specific result of Source Model and Error type.
     func getCategorisationData(request: NewsRequest,completionHandler: @escaping (_ result: Sources?, _ error : Error?)-> Void){
 
         let url : URL = request.finalUrl!

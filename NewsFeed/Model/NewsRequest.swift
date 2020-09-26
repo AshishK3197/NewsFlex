@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// NewsRequest for creating specific request types for Api Call.
 enum NewsRequest{
     case country (country: String)
     case category(category: String)
@@ -15,6 +16,7 @@ enum NewsRequest{
     case categorizationData
     
     
+    /// Generating finalURL based upon cases of NewsRequest Enum.
     var finalUrl: URL?{
         switch self {
         case .country(let country):

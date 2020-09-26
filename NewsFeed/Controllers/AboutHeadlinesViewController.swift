@@ -11,7 +11,7 @@ import UIKit
 class AboutHeadlinesViewController: UIViewController{
     
     //MARK: - Variable Declaration
-    var recievedNewsImage: UIImage?
+   fileprivate var recievedNewsImage: UIImage?
     
     var recievedNewsItem : Article?
     
@@ -151,33 +151,31 @@ class AboutHeadlinesViewController: UIViewController{
         }
     }
     
-    // Helper to toggle UI elements before and after screenshot capture
-    func fadeUIElements(with alpha: CGFloat) {
-        UIView.animate(withDuration: 0.1) {
-            self.backButton.alpha = alpha
-            self.shareButton.alpha = alpha
-        }
-    }
-    
-    // Helper method to generate article screenshots
-    func captureScreenShot() -> UIImage? {
-        //Create the UIImage
-        let bounds = UIScreen.main.bounds
-        UIGraphicsBeginImageContextWithOptions(bounds.size, true, 0.0)
-        self.view.drawHierarchy(in: bounds, afterScreenUpdates: false)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return image
-        
-    }
-    
-    
     @IBAction func dismissBackButton(_ sender: UIButton) {
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
-   
+    /// Helper to toggle UI elements before and after screenshot capture
+     private func fadeUIElements(with alpha: CGFloat) {
+          UIView.animate(withDuration: 0.1) {
+              self.backButton.alpha = alpha
+              self.shareButton.alpha = alpha
+          }
+      }
+      
+    /// Helper method to generate article screenshots
+    /// - Returns: UIImage after customisation.
+    private  func captureScreenShot() -> UIImage? {
+          //Create the UIImage
+          let bounds = UIScreen.main.bounds
+          UIGraphicsBeginImageContextWithOptions(bounds.size, true, 0.0)
+          self.view.drawHierarchy(in: bounds, afterScreenUpdates: false)
+          let image = UIGraphicsGetImageFromCurrentImageContext()
+          UIGraphicsEndImageContext()
+          
+          return image
+          
+      }
     
     
 }

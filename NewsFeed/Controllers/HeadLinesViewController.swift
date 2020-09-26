@@ -30,25 +30,6 @@ class HeadLinesViewController: UIViewController{
         registerNib()
         
     }
-    
-    func createSpinnerView() {
-        let child = SpinnerViewController()
-        
-        // add the spinner view controller
-        addChild(child)
-        child.view.frame = view.frame
-        view.addSubview(child.view)
-        child.didMove(toParent: self)
-        
-        // wait two seconds to simulate some work happening
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            // then remove the spinner view controller
-            child.willMove(toParent: nil)
-            child.view.removeFromSuperview()
-            child.removeFromParent()
-        }
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if (newsData.count == 0) {
@@ -56,7 +37,7 @@ class HeadLinesViewController: UIViewController{
         }
     }
     
-    //MARK: - IBOutlets
+    //MARK: - IBOutlets/IBActions
     @IBOutlet weak var headLinesTableView: UITableView!
     
     @IBAction func countryBarButton(_ sender: UIBarButtonItem) {
@@ -141,7 +122,6 @@ class HeadLinesViewController: UIViewController{
                     if let data = newsModel{
                             self.newsData.removeAll()
                             self.newsData = data.articles
-//                            SpinnerViewController.shared.createSpinnerView()
                         DispatchQueue.main.async {
                             self.createSpinnerView()
                             self.headLinesTableView.reloadData()
@@ -155,9 +135,10 @@ class HeadLinesViewController: UIViewController{
     }
 }
 
-//MARK: - Network Calls
+//MARK: - Network Calls and Other Mandatory View Modification Functions.
 extension HeadLinesViewController{
     
+    /// Function Responsible for getting News Articles from API on App Launch
     func getNewsData(){
         
         apiManager.getJSONDataFromUrl(request: NewsRequest.sources(source: "google-news")) { (newsModel, error) in
@@ -174,10 +155,30 @@ extension HeadLinesViewController{
         }
     }
     
-    func registerNib(){
+    /// Function responsible for registering Custom Cell XIB in the TableView.
+    private func registerNib(){
         let nib = UINib(nibName: "NewsTableViewCell", bundle: nil)
         headLinesTableView.register(nib, forCellReuseIdentifier: "newsCell")
     }
+    
+    /// Function responsible for adding the spinner to the View Controller as a child, and simulate the spinner till the data(Articles) loads in from the server in the TableView.
+      func createSpinnerView() {
+          let child = SpinnerViewController()
+          
+          // add the spinner view controller
+          addChild(child)
+          child.view.frame = view.frame
+          view.addSubview(child.view)
+          child.didMove(toParent: self)
+          
+          // wait two seconds to simulate some work happening
+          DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+              // then remove the spinner view controller
+              child.willMove(toParent: nil)
+              child.view.removeFromSuperview()
+              child.removeFromParent()
+          }
+      }
     
 }
 

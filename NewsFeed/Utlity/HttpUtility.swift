@@ -10,6 +10,11 @@ import Foundation
 
 struct HttpUtility
 {
+    /// Generic function responsible for creating a dataTask with the help of URL and a completion Handler for getting results asynchronously.
+    /// - Parameters:
+    ///   - requestUrl: A request URL for feeding in the request for fetching JSOn Data.
+    ///   - resultType: Input Parameter for decoding the JSON Data with respect to the specific Model Type.
+    ///   - completionHandler: Completion Handler of escaping type with specific result type.
     func getApiData<T:Decodable>(requestUrl: URL,resultType: T.Type, completionHandler:@escaping(_ result: T?)-> Void)
     {
         URLSession.shared.dataTask(with: requestUrl) { (responseData, httpUrlResponse, error) in

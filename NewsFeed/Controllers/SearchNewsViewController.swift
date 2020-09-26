@@ -9,12 +9,16 @@
 import UIKit
 
 class SearchNewsViewController: UIViewController {
-    let searchController = UISearchController(searchResultsController: nil)
     
+    
+    //MARK: - IBOutlets/IBActions
     @IBOutlet weak var searchNewsTableView: UITableView!
-    let apiManager = ApiManager()
-    var newsData = [Article]()
-    var filteredNewsData = [Article]()
+    
+    //MARK: - Variable Declaration
+    fileprivate  let searchController = UISearchController(searchResultsController: nil)
+    fileprivate  let apiManager = ApiManager()
+    fileprivate  var newsData = [Article]()
+    fileprivate  var filteredNewsData = [Article]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +30,11 @@ class SearchNewsViewController: UIViewController {
     
 }
 
+//MARK: - Network Calls
 extension SearchNewsViewController{
     
-    func getNewsData(){
+    /// Function Responsible for getting News Articles from API on App Launch
+    private func getNewsData(){
         
         apiManager.getJSONDataFromUrl(request: NewsRequest.sources(source: "google-news")) { (newsModel, error) in
             if let err = error{
@@ -44,14 +50,16 @@ extension SearchNewsViewController{
         }
     }
     
-    func registerNib(){
+    /// Function responsible for registering Custom Cell XIB in the TableView.
+    private func registerNib(){
         let nib = UINib(nibName: "NewsTableViewCell", bundle: nil)
         searchNewsTableView.register(nib, forCellReuseIdentifier: "newsCell")
     }
 }
 
+//MARK: - Seach Control Delegate Methods
 extension SearchNewsViewController :UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating{
-
+    
     private func configureSearchBar(){
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
@@ -69,50 +77,36 @@ extension SearchNewsViewController :UISearchBarDelegate, UISearchControllerDeleg
         self.filteredNewsData = searchNews.count == 0 ? newsData : newsData.filter{
             ($0.title?.localizedCaseInsensitiveContains(searchNews))!
         }
-                self.searchNewsTableView.reloadData()
-        }
+        self.searchNewsTableView.reloadData()
+    }
 }
 
-
+//MARK: - Table View Methods
 extension SearchNewsViewController: UITableViewDataSource , UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-           return 400
-       }
+        return 400
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredNewsData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = searchNewsTableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsTableViewCell
-        cell.NewsTitleLabel.text = filteredNewsData[indexPath.row].title
-        cell.NewsPublishedAtLabel.text = filteredNewsData[indexPath.row].publishedAt
-        cell.NewsImageView.image = UIImage(named: filteredNewsData[indexPath.row].urlToImage!)
-        cell.NewsAuthorLabel.text = filteredNewsData[indexPath.row].author
-        
-        if let imageUrl = URL(string: "\(filteredNewsData[indexPath.row].urlToImage ?? "No image URL found")"){
-            URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
-                if let imageData = data{
-                    DispatchQueue.main.async {
-                        cell.NewsImageView.image = UIImage(data: imageData)
-                    }
-                }
-            }.resume()
-        }
-        
+        guard let cell = searchNewsTableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as? NewsTableViewCell else {fatalError("Could not create NewsTableViewCell ")}
+        cell.filteredNewsData = filteredNewsData[indexPath.row]
         return cell
     }
     
-     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-                searchNewsTableView.deselectRow(at: indexPath, animated: true)
-                let vc = self.storyboard?.instantiateViewController(identifier: "AboutHeadlinesViewController") as? AboutHeadlinesViewController
-                vc?.recievedNewsItem = filteredNewsData[indexPath.row]
-                let navVC = UINavigationController(rootViewController: vc!)
-                navVC.isNavigationBarHidden = true
-                navVC.modalPresentationStyle = UIDevice.current.userInterfaceIdiom == .phone ? .fullScreen : .formSheet
-                self.navigationController?.present(navVC, animated: true, completion: nil)
-            }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        searchNewsTableView.deselectRow(at: indexPath, animated: true)
+        let vc = self.storyboard?.instantiateViewController(identifier: "AboutHeadlinesViewController") as? AboutHeadlinesViewController
+        vc?.recievedNewsItem = filteredNewsData[indexPath.row]
+        let navVC = UINavigationController(rootViewController: vc!)
+        navVC.isNavigationBarHidden = true
+        navVC.modalPresentationStyle = UIDevice.current.userInterfaceIdiom == .phone ? .fullScreen : .formSheet
+        self.navigationController?.present(navVC, animated: true, completion: nil)
+    }
     
     
     

@@ -24,7 +24,6 @@ extension HeadLinesViewController: UITableViewDataSource ,UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = headLinesTableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as? NewsTableViewCell else {fatalError("Could not create NewsTableViewCell")}
         cell.newsData = newsData[indexPath.row]
-        
         return cell
     }
     
