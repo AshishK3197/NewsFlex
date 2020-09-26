@@ -2,7 +2,7 @@
 //  AboutHeadlinesViewController.swift
 //  NewsFeed
 //
-//  Created by Ashish Kumar on 14/02/20.
+//  Created by Ashish Kumar on 24/09/20.
 //  Copyright © 2020 Ashish Kumar. All rights reserved.
 //
 
@@ -14,6 +14,44 @@ class AboutHeadlinesViewController: UIViewController{
     var recievedNewsImage: UIImage?
     
     var recievedNewsItem : Article?
+    
+    //MARK: - VC LifeCycle Methods
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil;
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        newsImageView.addGradient([UIColor(white: 0, alpha: 0.6).cgColor, UIColor.clear.cgColor,
+         UIColor(white: 0, alpha: 0.6).cgColor],
+        locations: [0.0, 0.05, 0.85])
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+           super.viewDidAppear(animated)
+           newsTitleLabel.center.y += 20
+           newsAuthorLabel.center.y += 20
+           contextTextView.center.y += 20
+
+           UIView.animate(withDuration: 0.07, delay: 0.0, options: .curveEaseIn, animations: {
+               self.newsTitleLabel.alpha = 1.0
+               self.newsTitleLabel.center.y -= 20
+               self.newsAuthorLabel.alpha = 1.0
+               self.newsAuthorLabel.center.y -= 20
+           })
+           UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseIn, animations: {
+               self.contextTextView.center.y -= 20
+               self.contextTextView.alpha = 1.0
+           })
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+    }
+    
+    
+    override var prefersStatusBarHidden: Bool {
+           return true
+       }
     
     //MARK: - IBOutlets
     @IBOutlet weak var newsImageView: UIImageView!{
@@ -89,7 +127,7 @@ class AboutHeadlinesViewController: UIViewController{
     @IBAction func shareButton(_ sender: UIButton) {
         fadeUIElements(with: 0.0)
         
-        let delay = DispatchTime.now() + 0.11
+        let delay = DispatchTime.now() + 0.7
         DispatchQueue.main.asyncAfter(deadline: delay) {
             guard let shareURL = self.recievedNewsItem?.url else {return}
                 let articleImage = self.captureScreenShot()
@@ -139,50 +177,9 @@ class AboutHeadlinesViewController: UIViewController{
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
+   
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil;
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        newsImageView.addGradient([UIColor(white: 0, alpha: 0.6).cgColor, UIColor.clear.cgColor,
-         UIColor(white: 0, alpha: 0.6).cgColor],
-        locations: [0.0, 0.05, 0.85])
-    }
     
-    override func viewDidAppear(_ animated: Bool) {
-           super.viewDidAppear(animated)
-           newsTitleLabel.center.y += 20
-           newsAuthorLabel.center.y += 20
-           contextTextView.center.y += 20
-
-           UIView.animate(withDuration: 0.07, delay: 0.0, options: .curveEaseIn, animations: {
-               self.newsTitleLabel.alpha = 1.0
-               self.newsTitleLabel.center.y -= 20
-               self.newsAuthorLabel.alpha = 1.0
-               self.newsAuthorLabel.center.y -= 20
-           })
-           UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseIn, animations: {
-               self.contextTextView.center.y -= 20
-               self.contextTextView.alpha = 1.0
-           })
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-    }
 }
 
-extension UIImageView {
 
-    func addGradient(_ color: [CGColor], locations: [NSNumber]) {
-
-        let gradient: CAGradientLayer = CAGradientLayer()
-        gradient.frame = self.superview!.frame
-        gradient.colors = color
-        gradient.locations = locations
-        self.layer.addSublayer(gradient)
-    }
-}

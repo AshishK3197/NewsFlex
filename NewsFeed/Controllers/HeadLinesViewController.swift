@@ -2,7 +2,7 @@
 //  HeadLinesViewController.swift
 //  NewsFeed
 //
-//  Created by Ashish Kumar on 14/02/20.
+//  Created by Ashish Kumar on 24/09/20.
 //  Copyright © 2020 Ashish Kumar. All rights reserved.
 //
 
@@ -12,137 +12,146 @@ import MessageUI
 
 class HeadLinesViewController: UIViewController{
     
-    //MARK: - IBOutlets
-    @IBOutlet weak var headLinesTableView: UITableView!
-    
     //MARK: - Variable Declaration
     let apiManager = ApiManager()
     var newsData = [Article]()
-    let monitor = NWPathMonitor(requiredInterfaceType: .wifi)
-    let transition = SlideInTransition()
-    var topView: UIView?
+    private var categories: [String] = []
+    
+    private var languages: [String] = []
+    
+    private var countries: [String] = []
+
     
     //MARK: - VC LifeCycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil;
         getNewsData()
         registerNib()
         
     }
     
+    func createSpinnerView() {
+        let child = SpinnerViewController()
+        
+        // add the spinner view controller
+        addChild(child)
+        child.view.frame = view.frame
+        view.addSubview(child.view)
+        child.didMove(toParent: self)
+        
+        // wait two seconds to simulate some work happening
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            // then remove the spinner view controller
+            child.willMove(toParent: nil)
+            child.view.removeFromSuperview()
+            child.removeFromParent()
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //Spinner Setup
         if (newsData.count == 0) {
-            let spinner = UIActivityIndicatorView(style: .medium)
-            spinner.startAnimating()
-            headLinesTableView.backgroundView = spinner
+            createSpinnerView()
+        }
+    }
+    
+    //MARK: - IBOutlets
+    @IBOutlet weak var headLinesTableView: UITableView!
+    
+    @IBAction func countryBarButton(_ sender: UIBarButtonItem) {
+        
+        self.apiManager.getCategorisationData(request: NewsRequest.categorizationData) { (sources, error) in
+            if let error = error{
+                debugPrint("Error fetching data \(error.localizedDescription)")
+            }
             
-            headLinesTableView.separatorStyle = .none
-            
-            DispatchQueue.main.async {
-                Thread.sleep(forTimeInterval: 1)
+            if let safeData = sources{
+                self.countries = Array(Set(safeData.sources.map{$0.country}))
                 
-                OperationQueue.main.addOperation() {
-                    spinner.stopAnimating()
-                    self.headLinesTableView.reloadData()
+            }
+        }
+        
+        let categoryActivityVC = UIAlertController(title: "Select a Country",
+                                                   message: nil,
+                                                   preferredStyle: .actionSheet)
+        
+        let cancelButton = UIAlertAction(title: "Cancel",
+                                         style: .cancel,
+                                         handler: nil)
+        
+        categoryActivityVC.addAction(cancelButton)
+        
+        for country in countries{
+            
+            let countryButton = UIAlertAction(title: country.formattedCountryDescription, style: .default) { action in
+                self.apiManager.getJSONDataFromUrl(request: NewsRequest.country(country: country)) { (newsModel, error) in
+                    if let err = error{
+                        print("Error fetching Data NewsData \(err.localizedDescription)")
+                    }
+
+                    if let data = newsModel{
+                            self.newsData.removeAll()
+                            self.newsData = data.articles
+                        DispatchQueue.main.async {
+                            self.createSpinnerView()
+                            self.headLinesTableView.reloadData()
+                        }
+                    }
                 }
             }
+            categoryActivityVC.addAction(countryButton)
         }
-    }
-    
-    @IBAction func toggleMenu(_ sender: UIBarButtonItem) {
-        guard let hamburgerMenuViewController = self.storyboard?.instantiateViewController(identifier: "HamburgerMenuViewController") as? HamburgerMenuViewController else {return}
-        hamburgerMenuViewController.didTapMenuType = { menuType in
-            self.transitionToNew(menuType)
-        }
-        hamburgerMenuViewController.modalPresentationStyle = .overCurrentContext
-        hamburgerMenuViewController.transitioningDelegate = self
-        present(hamburgerMenuViewController, animated: true)
+        
+        self.present(categoryActivityVC, animated: true, completion: nil)
         
     }
     
-    func transitionToNew(_ menuType : MenuType){
+    @IBAction func categoryBarButton(_ sender: UIBarButtonItem) {
         
-        topView?.removeFromSuperview()
-        switch menuType {
-        case .about:
-            guard let aboutHamburgerMenuVC = self.storyboard?.instantiateViewController(identifier: "AboutHamburgerMenuViewController") else {return}
-            self.navigationController?.pushViewController(aboutHamburgerMenuVC, animated: true)
+        let categoryActivityVC = UIAlertController(title: "Select a Category",
+                                                   message: nil,
+                                                   preferredStyle: .actionSheet)
+        
+        let cancelButton = UIAlertAction(title: "Cancel",
+                                         style: .cancel,
+                                         handler: nil)
+        
+        categoryActivityVC.addAction(cancelButton)
+        
+        self.apiManager.getCategorisationData (request: NewsRequest.categorizationData) { (sources, error) in
+            if let error = error{
+                debugPrint("Error fetching data \(error.localizedDescription)")
+            }
             
-        case .contactUs:
-            let webVC = self.storyboard?.instantiateViewController(withIdentifier: "webview") as? WebViewViewController
-            webVC?.modalPresentationStyle = UIDevice.current.userInterfaceIdiom == .phone ? .fullScreen : .formSheet
-            webVC?.recievedUrl = "https://www.linkedin.com/in/ashishk161/"
-            self.navigationController?.pushViewController(webVC! , animated: true)
-            
-        case .feedback:
-            let mailComposeViewController = configureMailController()
-            if MFMailComposeViewController.canSendMail(){
-                self.present(mailComposeViewController, animated: true, completion: nil)
-            }else
-            {
-                showMailError()
+            if let safeData = sources{
+                self.categories = Array(Set(safeData.sources.map{$0.category}))
+                
             }
         }
         
-    }
-}
-
-//MARK: - MailComposition Methods
-extension HeadLinesViewController : MFMailComposeViewControllerDelegate{
-    func configureMailController()-> MFMailComposeViewController{
-        let mailComposerVC = MFMailComposeViewController()
-        mailComposerVC.mailComposeDelegate = self
-        mailComposerVC.setToRecipients(["contactashish161@gmail.com"])
-        mailComposerVC.setSubject("FeedBack")
-        mailComposerVC.setMessageBody("Feedback for improvemnts", isHTML: false)
-        return mailComposerVC
-    }
-    
-    func showMailError(){
-        let sendMailErrorAlert = UIAlertController(title: "Could not send mail", message: "Your device could not sent mail,Plzz try again!!!", preferredStyle: .alert)
-        let dismiss = UIAlertAction(title: "OK", style: .default, handler: nil)
-        sendMailErrorAlert.addAction(dismiss)
-        self.present(sendMailErrorAlert, animated: true, completion: nil)
-    }
-    
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        if let err = error{
-            print(err.localizedDescription)
-            controller.dismiss(animated: true, completion: nil)
+        for category in categories{
+            
+            let categoryButton = UIAlertAction(title: category.uppercased(), style: .default) { action in
+                self.apiManager.getJSONDataFromUrl(request: NewsRequest.category(category: category)) { (newsModel, error) in
+                    if let err = error{
+                        print("Error fetching Data NewsData \(err.localizedDescription)")
+                    }
+                    
+                    if let data = newsModel{
+                            self.newsData.removeAll()
+                            self.newsData = data.articles
+//                            SpinnerViewController.shared.createSpinnerView()
+                        DispatchQueue.main.async {
+                            self.createSpinnerView()
+                            self.headLinesTableView.reloadData()
+                        }
+                    }
+                }
+            }
+            categoryActivityVC.addAction(categoryButton)
         }
-        
-        switch result {
-        case .saved:
-            print("Saved")
-        case .cancelled:
-            print("Cancelled")
-        case .failed:
-            print("Failed")
-        case .sent:
-            print("Sent")
-         default:
-            print("Not a matching case")
-        }
-        controller.dismiss(animated: true, completion: nil)
-    }
-}
-
-
-//MARK: - SlideInTransition Animation Methods
-extension HeadLinesViewController : UIViewControllerTransitioningDelegate {
-    
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        transition.isPresenting = true
-        return transition
-    }
-    
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        transition.isPresenting = false
-        return transition
+        self.present(categoryActivityVC, animated: true, completion: nil)
     }
 }
 
@@ -170,49 +179,6 @@ extension HeadLinesViewController{
         headLinesTableView.register(nib, forCellReuseIdentifier: "newsCell")
     }
     
-    
-    
 }
 
-//MARK: - Table View Methods
-extension HeadLinesViewController: UITableViewDataSource ,UITableViewDelegate{
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 400
-    }
-    
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newsData.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = headLinesTableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsTableViewCell
-        cell.NewsTitleLabel.text = newsData[indexPath.row].title
-        cell.NewsPublishedAtLabel.text = newsData[indexPath.row].publishedAt
-        cell.NewsAuthorLabel.text = newsData[indexPath.row].author
-        
-        if let imageUrl = URL(string: "\(newsData[indexPath.row].urlToImage ?? "No image URL found")"){
-            URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
-                if let imageData = data{
-                    DispatchQueue.main.async {
-                        cell.NewsImageView.image = UIImage(data: imageData)
-                    }
-                }
-            }.resume()
-        }
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        headLinesTableView.deselectRow(at: indexPath, animated: true)
-        let vc = self.storyboard?.instantiateViewController(identifier: "AboutHeadlinesViewController") as? AboutHeadlinesViewController
-        vc?.recievedNewsItem = newsData[indexPath.row]
-        let navVC = UINavigationController(rootViewController: vc!)
-        navVC.isNavigationBarHidden = true
-        navVC.modalPresentationStyle = UIDevice.current.userInterfaceIdiom == .phone ? .fullScreen : .formSheet
-        self.navigationController?.present(navVC, animated: true, completion: nil)
-    }
-    
-}
+
